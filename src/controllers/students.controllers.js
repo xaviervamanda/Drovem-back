@@ -1,6 +1,6 @@
 import { getAllStudentsByClassDB, getAllStudentsClasses, getStudentByCpf, getStudentById, 
     registerStudentClass, registerStudentDB } from "../repositories/students.repositories.js";
-import { getClassIdByName } from "./classes.controllers.js";
+import { getClassIdByName } from "../repositories/classes.repositories.js";
 
 
 export async function registerStudent(req, res) {
