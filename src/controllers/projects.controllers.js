@@ -1,5 +1,5 @@
 import { getClassIdByName } from "../repositories/classes.repositories.js";
-import { getProjectByName, getProjectsByClassesDB, projectDeliveryDB, registerProjectAndClass } from "../repositories/projects.repositories.js";
+import { getAllProjectsDB, getProjectByName, getProjectsByClassesDB, projectDeliveryDB, registerProjectAndClass } from "../repositories/projects.repositories.js";
 import { getStudentByName } from "../repositories/students.repositories.js";
 
 export async function projectDelivery (req, res){
@@ -20,6 +20,15 @@ export async function getProjectsByClasses (req, res){
     const {classId, projectId} = req.body;
     try{
         const projects = await getProjectsByClassesDB(classId, projectId);
+        return res.status(200).send(projects.rows);
+    } catch(err){
+        return res.status(500).send(err.message);
+    }
+}
+
+export async function getAllProjects(req, res){
+    try{
+        const projects = await getAllProjectsDB();
         return res.status(200).send(projects.rows);
     } catch(err){
         return res.status(500).send(err.message);

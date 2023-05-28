@@ -12,7 +12,7 @@ export function registerProjectAndClass(classId, projectId){
     return db.query(`INSERT INTO classes_projects ("classId", "projectId") VALUES ($1, $2);`, [classId, projectId]);
 }
 
-export async function getProjectsByClassesDB (classId, projectId){
+export function getProjectsByClassesDB (classId, projectId){
     return db.query(`SELECT students.name AS "studentName", classes.name AS "className", projects.name AS "projectName"
     FROM classes_projects
     JOIN classes ON classes_projects."classId" = classes.id
@@ -20,4 +20,8 @@ export async function getProjectsByClassesDB (classId, projectId){
     JOIN students ON projects."studentId" = students.id
     WHERE "classId" = '$1' AND "projectId" = '$2'
     ORDER BY students.name;`, [classId, projectId]);
+}
+
+export function getAllProjectsDB (){
+    return db.query(`SELECT projects.name FROM projects;`);
 }

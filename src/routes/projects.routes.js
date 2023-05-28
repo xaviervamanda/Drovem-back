@@ -7,5 +7,6 @@ const projectsRouter = Router();
 
 projectsRouter.post ("/projects", validateSchema(productDeliverySchema), projectDelivery);
 projectsRouter.get ("/projects/:projectId/classes/:classId", getProjectsByClasses);
+projectsRouter.get ("/projects", getAllProjects);
 
 export default projectsRouter;
