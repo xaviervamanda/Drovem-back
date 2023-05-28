@@ -13,6 +13,10 @@ export function getStudentById(id){
     return db.query(`SELECT * FROM students WHERE id = '$1';`, [id]);
 }
 
+export function getStudentByName(name){
+    return db.query(`SELECT * FROM students WHERE name = '$1';`, [name]);
+}
+
 export function registerStudentClass (className, studentId){
     return db.query(`INSERT INTO students_classes ("classId", "studentId") VALUES ($1, $2);`, [className, studentId]);
 }
@@ -31,5 +35,6 @@ export function getAllStudentsByClassDB(id){
     FROM students_classes
     JOIN classes ON students_classes."classId" = classes.id
     JOIN students ON students_classes."studentId" = students.id
-    WHERE "classId" = '$1';`, [id]);
+    WHERE "classId" = '$1'
+    ORDER BY students.name;`, [id]);
 }

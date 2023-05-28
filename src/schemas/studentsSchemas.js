@@ -6,5 +6,5 @@ export const registerStudentSchema = joi.object({
     .messages({'string.pattern.base': `CPF must be a string with 11 numeric digits.`}).required(),
     email: joi.string().email({ tlds: { allow: false } }).required(),
     image: joi.string().uri().required(),
-    class: joi.string().required()
+    className: joi.string().required()
 })
