@@ -1,16 +1,17 @@
 import { getClassIdByName } from "../repositories/classes.repositories.js";
-import { getAllProjectsDB, getProjectByStudentId, getProjectsByClassesDB, projectDeliveryDB, registerProjectAndClass } from "../repositories/projects.repositories.js";
+import { getAllProjectsDB, getProjectByStudentId, getProjectId, getProjectsByClassesDB, projectDeliveryDB, registerProjectAndClass } from "../repositories/projects.repositories.js";
 import { getStudentByName } from "../repositories/students.repositories.js";
 
 export async function projectDelivery (req, res){
     const {className, studentName, projectName, link} = req.body;
     try{
         const student = await getStudentByName(studentName);
-        await projectDeliveryDB(student.rows[0].id, projectName, link);
+        const project = await getProjectId(projectName);
+        await projectDeliveryDB(student.rows[0].id, project.rows[0].id, link);
         const classId = await getClassIdByName(className);
-        const project = await getProjectByStudentId(projectName, student.rows[0].id);
-        await registerProjectAndClass(classId.rows[0].id, project.rows[0].id);
-        return res.status(200).send({id: project.rows[0].id, name: projectName});
+        const studentProject = await getProjectByStudentId(project.rows[0].id, student.rows[0].id);
+        await registerProjectAndClass(classId.rows[0].id, studentProject.rows[0].projectId);
+        return res.status(200).send({id: studentProject.rows[0].projectId, name: projectName});
     } catch(err){
         return res.status(500).send(err.message);
     }
