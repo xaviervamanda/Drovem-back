@@ -31,7 +31,8 @@ export function getAllStudentsClasses(studentId){
 export function getAllStudentsByClassDB(id){
     return db.query(`SELECT classes.name AS "className", 
     students.name AS "studentName", 
-    students.image AS "studentImage" 
+    students.image "AS "studentImage",
+    students.id AS "studentId"
     FROM students_classes
     JOIN classes ON students_classes."classId" = classes.id
     JOIN students ON students_classes."studentId" = students.id
