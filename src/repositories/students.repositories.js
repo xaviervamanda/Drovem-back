@@ -36,5 +36,5 @@ export function getAllStudentsByClassDB(id){
     JOIN classes ON students_classes."classId" = classes.id
     JOIN students ON students_classes."studentId" = students.id
     WHERE "classId" = $1
-    ORDER BY "students.name";`, [id]);
+    ORDER BY students.name;`, [id]);
 }
