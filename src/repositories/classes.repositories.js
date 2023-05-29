@@ -5,5 +5,5 @@ export function getClassIdByName (name){
 }
 
 export function getAllClassesDB (){
-    return db.query(`SELECT classes.name FROM classes;`);
+    return db.query(`SELECT * FROM classes;`);
 }
