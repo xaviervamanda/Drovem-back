@@ -10,7 +10,7 @@ export async function registerStudent(req, res) {
         await registerStudentDB(req.body);
         const student = await getStudentByCpf(cpf);
         const classId = await getClassIdByName(className);
-        await registerStudentClass(classId, student.rows[0].id);
+        await registerStudentClass(classId.rows[0].id, student.rows[0].id);
         return res.status(201).send({id: student.rows[0].id, name: student.rows[0].name, email: student.rows[0].email});
     } catch (err){
         return res.status(500).send(err.message);
