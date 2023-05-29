@@ -1,4 +1,4 @@
-import { getAllStudentsByClassDB, getAllStudentsClasses, getStudentByCpf, getStudentById, 
+import { getAllStudentsByClassDB, getAllStudentsClasses, getStudentByCpf, 
     registerStudentClass, registerStudentDB } from "../repositories/students.repositories.js";
 import { getClassIdByName } from "../repositories/classes.repositories.js";
 
@@ -19,10 +19,10 @@ export async function registerStudent(req, res) {
 
 export async function getStudentProfile(req, res) {
     const {id} = req.params;
+    const {student} = res.locals;
     try{
-        const student = await getStudentById(id);
-        const studentClasses = await getAllStudentsClasses(id);
-        return res.status(200).send({student: student.rows[0], Studentclasses: studentClasses.rows});
+        const studentClasses = await getAllStudentsClasses(Number(id));
+        return res.status(200).send({student: student, Studentclasses: studentClasses.rows});
     } catch (err){
         return res.status(500).send(err.message);
     }
@@ -31,7 +31,7 @@ export async function getStudentProfile(req, res) {
 export async function getAllStudentsByClass(req, res) {
     const {id} = req.params;
     try{
-        const students = await getAllStudentsByClassDB(id);
+        const students = await getAllStudentsByClassDB(Number(id));
         return res.status(200).send(students.rows);
     } catch (err){
         return res.status(500).send(err.message);

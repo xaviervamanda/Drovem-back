@@ -5,7 +5,7 @@ export function projectDeliveryDB (studentId, projectName, link){
 }
 
 export function getProjectByName(name){
-    return db.query(`SELECT * FROM projects WHERE name = '$1';`, [name]);
+    return db.query(`SELECT * FROM projects WHERE name = $1;`, [name]);
 }
 
 export function registerProjectAndClass(classId, projectId){
@@ -18,7 +18,7 @@ export function getProjectsByClassesDB (classId, projectId){
     JOIN classes ON classes_projects."classId" = classes.id
     JOIN projects ON classes_projects."projectId" = projects.id
     JOIN students ON projects."studentId" = students.id
-    WHERE "classId" = '$1' AND "projectId" = '$2'
+    WHERE "classId" = $1 AND "projectId" = $2
     ORDER BY students.name;`, [classId, projectId]);
 }
 
