@@ -1,11 +1,11 @@
 import {db} from "../database/database.connection.js";
 
 export function projectDeliveryDB (studentId, projectName, link){
-    return db.query(`INSERT INTO projects ("studentId", name, link) VALUES ($1, '$2', '$3');`, [studentId, projectName, link]);
+    return db.query(`INSERT INTO projects ("studentId", name, link) VALUES ($1, $2, $3);`, [studentId, projectName, link]);
 }
 
-export function getProjectByName(name){
-    return db.query(`SELECT * FROM projects WHERE name = $1;`, [name]);
+export function getProjectByStudentId(projectName, studentId){
+    return db.query(`SELECT * FROM projects WHERE name = $1 AND "studentId" = $2;`, [projectName, studentId]);
 }
 
 export function registerProjectAndClass(classId, projectId){
