@@ -17,9 +17,9 @@ export async function projectDelivery (req, res){
 }
 
 export async function getProjectsByClasses (req, res){
-    const {classId, projectId} = req.body;
+    const {classId, projectId} = req.params;
     try{
-        const projects = await getProjectsByClassesDB(classId, projectId);
+        const projects = await getProjectsByClassesDB(Number(classId), Number(projectId));
         return res.status(200).send(projects.rows);
     } catch(err){
         return res.status(500).send(err.message);
