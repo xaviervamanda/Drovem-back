@@ -23,5 +23,5 @@ export function getProjectsByClassesDB (classId, projectId){
 }
 
 export function getAllProjectsDB (){
-    return db.query(`SELECT DISTINCT projects.name FROM projects;`);
+    return db.query(`SELECT DISTINCT projects.name FROM projects ORDER BY projects.name;`);
 }
