@@ -13,15 +13,17 @@ export function registerProjectAndClass(classId, projectId){
 }
 
 export function getProjectsByClassesDB (classId, projectId){
-    return db.query(`SELECT students.name AS "studentName", classes.name AS "className", projects.name AS "projectName"
+    return db.query(`SELECT students.name AS "studentName", classes.name AS "className", projects.name AS "projectName", grades.grade
     FROM classes_projects
     JOIN classes ON classes_projects."classId" = classes.id
     JOIN projects ON classes_projects."projectId" = projects.id
     JOIN students ON projects."studentId" = students.id
-    WHERE "classId" = $1 AND "projectId" = $2
+    JOIN grades ON projects.id = grades."projectId"
+    WHERE "classId" = $1 AND classes_projects."projectId" = $2
     ORDER BY students.name;`, [classId, projectId]);
 }
 
 export function getAllProjectsDB (){
     return db.query(`SELECT DISTINCT projects.name FROM projects ORDER BY projects.name;`);
 }
+
