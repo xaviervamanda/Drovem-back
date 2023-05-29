@@ -13,7 +13,7 @@ export function getProjectId (projectName){
 }
 
 export function registerProjectAndClass(classId, projectId){
-    return db.query(`INSERT INTO classes_projects ("classId", "projectId") VALUES ($1, $2);`, [classId, projectId]);
+    return db.query(`INSERT INTO classes_projects ("classId", "studentProjectId") VALUES ($1, $2);`, [classId, projectId]);
 }
 
 export function getProjectsByClassesDB(classId, projectId) {

@@ -11,7 +11,7 @@ export async function projectDelivery (req, res){
         const classId = await getClassIdByName(className);
         const studentProject = await getProjectByStudentId(project.rows[0].id, student.rows[0].id);
         await registerProjectAndClass(classId.rows[0].id, studentProject.rows[0].projectId);
-        return res.status(200).send({id: studentProject.rows[0].projectId, name: projectName});
+        return res.status(200).send({id: studentProject.rows[0].id, name: projectName});
     } catch(err){
         return res.status(500).send(err.message);
     }
