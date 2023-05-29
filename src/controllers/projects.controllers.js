@@ -10,7 +10,7 @@ export async function projectDelivery (req, res){
         await projectDeliveryDB(student.rows[0].id, project.rows[0].id, link);
         const classId = await getClassIdByName(className);
         const studentProject = await getProjectByStudentId(project.rows[0].id, student.rows[0].id);
-        await registerProjectAndClass(classId.rows[0].id, studentProject.rows[0].projectId);
+        await registerProjectAndClass(classId.rows[0].id, studentProject.rows[0].studentProjectId);
         return res.status(200).send({id: studentProject.rows[0].id, name: projectName});
     } catch(err){
         return res.status(500).send(err.message);
